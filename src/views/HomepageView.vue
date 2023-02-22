@@ -3,13 +3,13 @@
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="@/assets/images/intro.jpg" class="d-block w-100" alt="..." height="500">
+            <img src="@/assets/images/intro.jpg" class="d-block w-100" alt="..." height="450">
             <div class="carousel-caption">
               <p class="mt-4" style="margin-right: 70px; font-size: x-large;">Welcome to Heroic recipes!</p>
               <p class="mb-4"  >SocialChef is the ultimate cooking social community, where recipes come to life.</p>
               <p class="mb-4"  >Discover new recipes and cooking techniques with our extensive collection of culinary creations .</p>
               <p class="mb-4" >perfect for any home chef looking to expand their repertoire.</p>
-              <button class="btn btn-light mb-4" style="margin-right: 50px;">Join our community</button>  
+              <RouterLink to="/login" class="btn btn-light mb-4" style="margin-right: 50px;" v-if="authstatus">Join our community</RouterLink>  
       
               <div class="d-flex flex-column justify-content-center align-items-center">
                 <form class="d-flex mb-4" @submit.prevent="searchrecipe">
@@ -147,11 +147,20 @@ export default {
             results:[],
             categoryname:'',
             searching: true,
-            searchinput:''
+            searchinput:'',
+            authstatus:true
         }
     },
 
     created() {
+
+    let tok = localStorage.getItem('tok');
+
+    if(tok){
+        this.authstatus=false;
+    }
+
+
         let id=1
         this.loadtasks(id);
         this.categoryname="latest recipes"

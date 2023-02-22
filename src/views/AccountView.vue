@@ -2,7 +2,7 @@
 
 
 
-<div class="container mt-3">
+<div class="container mt-5">
     <div class="row-md-2 offset-md-2">
         <div class="col">
             <h4>my account details</h4>
