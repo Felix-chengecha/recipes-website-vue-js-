@@ -20,7 +20,7 @@
                 aria-expanded="false" style="font-weight:bold;color:wheat; padding: 10px; margin-top: -10px; margin-right: 10px;"> {{ account }} </a>
           <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
             <li>  <RouterLink class="link1" to="/login" v-if="login">login</RouterLink> </li>
-            <li>  <RouterLink class="link1" to="/login" v-if="authstatus">Profile</RouterLink> </li>
+            <li>  <RouterLink class="link1" to="/myaccount" v-if="authstatus">Profile</RouterLink> </li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="link2" @click="logout" v-if="authstatus">Logout</a></li> 
           </ul>
@@ -69,7 +69,8 @@ export default {
     logout(){
       alert("are you sure you want to log out")
       localStorage.clear();
-      window.location.reload(true);
+      this.$route.push('/')
+      
     }
    
   }

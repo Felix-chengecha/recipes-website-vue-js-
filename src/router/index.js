@@ -4,6 +4,7 @@ import DetailsView from '../views/DetailsView.vue';
 import Bookmarks from '../views/BookmarksView.vue';
 import LoginView from '../views/LoginViews.vue';
 import RegisterView from '../views/RegisterView.vue';
+import AccountView from  '../views/AccountView.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -37,6 +38,12 @@ const router = createRouter({
             path: '/register',
             name: 'register',
             component: RegisterView
+        },
+
+        {
+            path: '/myaccount',
+            name: 'myaccount',
+            component: AccountView
         }
 
     ]

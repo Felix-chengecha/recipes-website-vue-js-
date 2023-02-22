@@ -50,35 +50,28 @@ export default{
             let token = response.token;
             let userid= response.user.id;
             let name = response.user.name;
+            let email =response.user.email;
+            let level = response.user.level;
 
             if(!token)
             {
                 console.log("token is null")
                 alert("check your email and password")
             }
-            else{
-                // console.log(token)
-                console.log(userid);
-                console.log(name);
+            else{ 
 
-               localStorage.setItem('id',userid);
+                localStorage.setItem('id',userid);
                 localStorage.setItem('name', name);
                 localStorage.setItem('tok',token);
+                localStorage.setItem('email',email);
+                localStorage.setItem('level',level);
                 this.$router.push("/")
 
+                console.log(email);
+                console.log(level)
+
             }
-               
-
-
-        //   for(let user of response){
-        //     let token = user.token;
-        //     console.log(token)
-
-        //   }
-
-
-            // console.log(response);
-
+            
         }
     }
 
