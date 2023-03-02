@@ -87,17 +87,25 @@ export default{
     },
     methods:{
       async  reguser(){
-            let link="http://127.0.0.1:8000/api/Recipe/register?name="+this.username+'&email='+this.email+'&level='+this.level+'&password='+this.password;           
-            const reg= await axios.post(link+ this.$data)
+        const data = {name: this.username, email: this.email, level: this.level, password: this.password }
+            const reg= await axios.post("http://127.0.0.1:8000/api/Recipe/register", data)
             let response= reg.data;
             let token=response.token;
+
+            let userid= response.user.id;
+            let name = response.user.name;
+            let email =response.user.email;
+            let level = response.user.level;
             if(!token){
                 alert('an error occured please try again!')
             }
             else{
-                this.$router.push('/login');
-                window.location.reload(true);
-                // localStorage.setItem(token);
+                localStorage.setItem('id',userid);
+                localStorage.setItem('name', name);
+                localStorage.setItem('tok',token);
+                localStorage.setItem('email',email);
+                localStorage.setItem('level',level);
+                this.$router.push("/")
 
             }
             console.log(response);

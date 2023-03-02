@@ -58,7 +58,7 @@ export default{
 
       let tok = localStorage.getItem('tok');
       
-        console.log(tok);
+        // console.log(tok);
 
         if(!tok){
           alert("please login")
@@ -66,7 +66,7 @@ export default{
         }
         else{
           let id = localStorage.getItem('id');
-          this.loadbooks(id);
+          this.loadbooks({user_id:id});
 
         }
 
@@ -75,16 +75,16 @@ export default{
     methods:{
 
         async loadbooks(id){
-            let link="http://127.0.0.1:8000/api/Recipe/boookmarks?user_id="+id;
-            const bokmak =await axios.post(link);
+            const bokmak =await axios.post('http://127.0.0.1:8000/api/Recipe/boookmarks',id);
             const response= bokmak.data.data
             this.results=response;
-            console.log(response)
+            // console.log(response)
         },
          
         async searchrecipe(){
-            let link="http://127.0.0.1:8000/api/Recipe/searchfood?food="+ this.searchinput;
-            const searchresults = await axios.post(link);
+          const data={food: this.searchinput};
+          
+            const searchresults = await axios.post('http://127.0.0.1:8000/api/Recipe/searchfood' ,data);
             const response = searchresults.data.data;
 
             this.results.splice(0, this.results.length);

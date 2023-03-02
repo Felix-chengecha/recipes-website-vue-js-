@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <a href="#" class="btn btn-warning btn-sm"> <i class="bi bi-bookmarks"></i> Add to bookmarks</a>
+        <a href="#" class="btn btn-warning btn-sm" @click="addbookmark"> <i class="bi bi-bookmarks"></i> Add to bookmarks</a>
       </div>
     </div>
   </div>
@@ -87,14 +87,24 @@ export default {
             rname:'',
             ingridients:[],
             nutrients:[],
-            processes:[]
+            processes:[],
+            meal_id:'',
+            user_id:'',
 
+            info :[
+              {"user_id": this.user_id,
+              "meals_id": this.meal_id }
+            ]
+
+        
         }
     },
 
     created(){
         let rid = this.$route.params.detailsid;
+      
        this.loaddetails(rid);
+       
     },
 
     methods:{
@@ -112,6 +122,7 @@ export default {
 
             for(let item of res) {
 
+                this.meal_id=id;
                 ingridient = item.ingridients;
                 nutrient =item.nutrients
                 process = item.process
@@ -121,13 +132,31 @@ export default {
                 this.processes = process.split("\r\n");
 
 
-                console.log(this.ingridients)
-                console.log(this.nutrients)
-                console.log(this.processes)
+              
        
             }
 
-        }
+        },
+      async addbookmark() {
+     
+            let userid= localStorage.getItem('id');
+            let mealid=[];
+
+            for(let mzig of this.detailsR) {
+              mealid = mzig.id;
+              }
+                  try {
+                  const data =  { user_id: parseInt(userid), meals_id: mealid };
+                  const addbook = await axios.post('http://127.0.0.1:8000/api/Recipe/add_bookmark', data);
+                  let bokmak = addbook.data;
+                  console.log(bokmak);
+                } catch (error) {
+                  console.error(error);
+                }
+
+      } 
+      
+      
     }
 
 

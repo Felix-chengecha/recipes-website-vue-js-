@@ -43,8 +43,9 @@ export default{
        async authuser(){
         console.log(this.$data)
 
-          let link="http://127.0.0.1:8000/api/Recipe/login?email="+this.email+'&password='+this.password;
-            const auth = await axios.post(link);
+        const details={email: this.email, password: this.password}
+
+            const auth = await axios.post("http://127.0.0.1:8000/api/Recipe/login", details);
             const response=auth.data;
 
             let token = response.token;
